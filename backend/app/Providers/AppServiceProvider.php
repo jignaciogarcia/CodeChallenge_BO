@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\BusinessLogicInterfaces\IUserService;
+use App\BusinessLogic\UserService;
+use App\DataAccessInterfaces\IUserRepository;
+use App\DataAccess\UserRepository;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +16,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(IUserRepository::class, UserRepository::class);
+        $this->app->bind(IUserService::class, UserService::class);
     }
 
     /**
