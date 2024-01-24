@@ -20,13 +20,16 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $message = '';
+        $token = '';
         $code = 0;
         try
         {
             $email = $request->input('email');
             $password = $request->input('password');
 
-            $this->userService->verifyUser($email, $password);
+            $user = $this->userService->verifyUser($email, $password);
+
+            $token = $user->createToken('personalToken')->plainTextToken;
             $message = 'Login Successful';
             $code = 200;
         }
@@ -41,6 +44,6 @@ class UserController extends Controller
             $code = 404;
         }
 
-        return response()->json(['message' => $message], $code);
+        return response()->json(['message' => $message, 'token' => $token], $code);
     }
 }
