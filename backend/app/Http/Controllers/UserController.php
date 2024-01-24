@@ -46,4 +46,11 @@ class UserController extends Controller
 
         return response()->json(['message' => $message, 'token' => $token], $code);
     }
+
+    public function getLoggedUserInfo()
+    {
+        $user = auth()->user();
+
+        return response()->json(['user'=> $user], 200);
+    }
 }

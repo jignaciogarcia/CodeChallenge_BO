@@ -20,3 +20,7 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::post('/login', [UserController::class, 'login']);
+
+Route::group(['middleware' => ['auth:sanctum']], function() {
+    Route::get('/user', [UserController::class,'getLoggedUserInfo']);
+});
