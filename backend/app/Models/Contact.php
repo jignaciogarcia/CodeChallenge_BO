@@ -15,6 +15,6 @@ class Contact extends Model
         'address',
         'email',
         'cellphoneNumber',
-        'profilePictureURL'
+        'profilePictureUrl'
     ];
 }

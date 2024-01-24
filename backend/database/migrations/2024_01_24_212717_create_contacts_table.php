@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('email');
             $table->string('cellphoneNumber');
-            $table->string('profilePictureURL');
+            $table->string('profilePictureUrl');
             $table->timestamps();
             $table->foreignUuid('user_id')
             ->references('id')
