@@ -17,4 +17,11 @@ class Contact extends Model
         'cellphoneNumber',
         'profilePictureUrl'
     ];
+
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+        'user_id'
+    ];
 }

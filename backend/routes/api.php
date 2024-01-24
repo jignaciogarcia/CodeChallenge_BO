@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +25,5 @@ Route::post('/login', [UserController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('/user', [UserController::class,'getLoggedUserInfo']);
     Route::post('/logout', [UserController::class,'logout']);
+    Route::get('/contacts', [ContactController::class,'getUserContacts']);
 });
