@@ -2,7 +2,6 @@
 
 namespace App\BusinessLogic;
 
-use App\Exceptions\ArgumentException;
 use App\Models\User;
 use App\Models\Contact;
 use App\BusinessLogicInterfaces\IContactService;
@@ -20,5 +19,10 @@ class ContactService implements IContactService
     public function createContact(User $user, Contact $contact) : Contact 
     {
         return $this->contactRepository->create($user, $contact);
+    }
+
+    public function updateContact(string $userId, Contact $newContact, string $id) : Contact 
+    {
+        return $this->contactRepository->update($userId, $newContact, $id);
     }
 }

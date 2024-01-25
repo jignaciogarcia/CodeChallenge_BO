@@ -43,4 +43,27 @@ class ContactController extends Controller
 
         return response()->json(['contact'=> $savedContact], 201);
     }
+
+    public function update(Request $request, $id) 
+    {
+        $request->validate([
+            'name' => 'string',
+            'address' => 'string',
+            'email' => 'string|email',
+            'cellphoneNumber' => 'string',
+            'profilePictureUrl' => 'string'
+        ]);
+        $newContact = new Contact();
+        $newContact->name = $request->name;
+        $newContact->address = $request->address;
+        $newContact->email = $request->email;
+        $newContact->cellphoneNumber = $request->cellphoneNumber;
+        $newContact->profilePictureUrl = $request->profilePictureUrl;
+
+        $user = auth()->user();
+
+        $updatedContact = $this->contactService->updateContact($user->id, $newContact, $id);
+
+        return response()->json(['contact'=> $updatedContact], 200);
+    }
 }

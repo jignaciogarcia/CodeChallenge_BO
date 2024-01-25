@@ -27,4 +27,5 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/logout', [UserController::class,'logout']);
     Route::get('/contacts', [ContactController::class,'getUserContacts']);
     Route::post('/contacts', [ContactController::class,'create']);
+    Route::put('/contacts/{contactId}', [ContactController::class,'update']);
 });
