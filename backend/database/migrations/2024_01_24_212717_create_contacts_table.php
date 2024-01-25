@@ -15,10 +15,10 @@ return new class extends Migration
             $table->uuid('id');
             $table->primary(['id']);
             $table->string('name');
-            $table->string('address');
-            $table->string('email');
-            $table->string('cellphoneNumber');
-            $table->string('profilePictureUrl');
+            $table->string('address')->nullable();
+            $table->string('email')->nullable();
+            $table->string('cellphoneNumber')->nullable();
+            $table->string('profilePictureUrl')->nullable();
             $table->timestamps();
             $table->foreignUuid('user_id')
             ->references('id')
