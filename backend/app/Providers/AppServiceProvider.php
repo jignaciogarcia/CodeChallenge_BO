@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\BusinessLogic\ContactService;
+use App\BusinessLogicInterfaces\IContactService;
+use App\DataAccess\ContactRepository;
+use App\DataAccessInterfaces\IContactRepository;
 use Illuminate\Support\ServiceProvider;
 use App\BusinessLogicInterfaces\IUserService;
 use App\BusinessLogic\UserService;
@@ -17,7 +21,9 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(IUserRepository::class, UserRepository::class);
+        $this->app->bind(IContactRepository::class, ContactRepository::class);
         $this->app->bind(IUserService::class, UserService::class);
+        $this->app->bind(IContactService::class, ContactService::class);
     }
 
     /**

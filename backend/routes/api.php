@@ -26,4 +26,5 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('/user', [UserController::class,'getLoggedUserInfo']);
     Route::post('/logout', [UserController::class,'logout']);
     Route::get('/contacts', [ContactController::class,'getUserContacts']);
+    Route::post('/contacts', [ContactController::class,'create']);
 });
