@@ -10,8 +10,13 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.11.2",
     "nuxt": "^3.9.3",
     "vue": "^3.4.14",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "pinia": "^2.1.7",
+    "vee-validate": "^4.12.5"
   }
 }
