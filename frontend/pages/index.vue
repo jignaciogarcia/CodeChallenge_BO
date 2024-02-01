@@ -26,10 +26,17 @@
     </div>
 </template>
 
+
 <script>
 import { Form, Field, ErrorMessage } from 'vee-validate';
+import { useAuthStore } from '@/stores/authStore';
 
 export default {
+    setup() {
+        const authStore = useAuthStore();
+
+        return { authStore }
+    },
     components: {
         Form,
         Field,
@@ -37,7 +44,7 @@ export default {
     },
     methods: {
         onSubmit(values) {
-            console.log(values);
+            this.authStore.login(values.email, values.password);
         }
     }
 }
