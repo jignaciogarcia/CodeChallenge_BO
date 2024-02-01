@@ -9,7 +9,6 @@ export const useAuthStore = defineStore('authStore', {
     },
     actions: {
         async login(email, password) {
-            console.log(email + password);
             const key = await $fetch('http://127.0.0.1:8000/api/login', {
                 method: 'POST',
                 body: {
@@ -20,7 +19,6 @@ export const useAuthStore = defineStore('authStore', {
                     'Accept': 'application/json'
                 }
             });
-            console.log(key);
             this.userKey = key.token;
         }
     }
