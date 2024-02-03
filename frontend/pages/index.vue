@@ -44,7 +44,7 @@ export default {
     },
     methods: {
         onSubmit(values) {
-            this.authStore.login(values.email, values.password);
+            this.authStore.login(values.email, values.password).then(() => navigateTo('/contacts'));
         }
     }
 }
