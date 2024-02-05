@@ -4,7 +4,7 @@
         <div class="pt-14 px-10 w-screen">
             <h1 class="font-sans font-bold text-3xl">Contacts</h1>
             <div class="mt-5 rounded p-1 shadow-x1 w-full flex bg-white">
-                <img src="../assets/searchIcon.png" alt="Search icon" class="h-5 w-5">
+                <img src="../../assets/searchIcon.png" alt="Search icon" class="h-5 w-5">
                 <input type="text" placeholder="Search contacts" class="w-full pl-3" v-model="contactsStore.searchContactsValue">
             </div>
         </div>

@@ -8,7 +8,12 @@
                     <p class="font-sans text-sm text-slate-500">{{ contact.email }}</p>
                 </div>
             </div>
-            <img src="../assets/arrowRight.png" class="w-6 h-6 mt-3 ml-auto">
+            <div class="ml-auto">
+                <NuxtLink :to="`/contacts/${contact.id}`">
+                    <img src="../assets/arrowRight.png" class="w-6 h-6 mt-3">
+                </NuxtLink>
+            </div>
+            
         </div>
     </div>
 </template>
