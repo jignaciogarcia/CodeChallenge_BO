@@ -26,5 +26,9 @@ export const useContactsStore = defineStore('contactsStore', () => {
         this.userContacts = response.contacts;
     }
 
-    return {userContacts, searchContactsValue, filteredContacts, getUserContacts};
+    function getContactById(id) {
+        return userContacts.value.filter(c => c.id == id)[0];
+    }
+
+    return {userContacts, searchContactsValue, filteredContacts, getUserContacts, getContactById};
 })
