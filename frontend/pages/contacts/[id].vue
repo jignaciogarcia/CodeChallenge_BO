@@ -5,8 +5,11 @@
         </header>
         <div class="hidden md:pt-10 md:px-14 md:block">
             <div class="bg-gray-300 h-48 w-full rounded-xl flex justify-end items-end">
-                <button
-                    class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-8 active:bg-violet-700 mr-5 mb-5">EDIT</button>
+                <NuxtLink :to="`/contacts/create-update/${contact.id}`">
+                    <button class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-8 active:bg-violet-700 mr-5 mb-5">
+                        EDIT
+                    </button>
+                </NuxtLink>
             </div>
         </div>
         <div class="md:flex md:flex-col md:items-center">
