@@ -30,5 +30,36 @@ export const useContactsStore = defineStore('contactsStore', () => {
         return userContacts.value.filter(c => c.id == id)[0];
     }
 
-    return {userContacts, searchContactsValue, filteredContacts, getUserContacts, getContactById};
+    async function editContact(contactId, contactInfo) {
+        let userKey = localStorage.getItem('APIkey');
+        let routeWithId = 'http://127.0.0.1:8000/api/contacts' + '/' + contactId;
+
+        let response = await $fetch(routeWithId, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${userKey}`
+            },
+            credentials: 'omit',
+            body: contactInfo
+        });
+        console.log(response);
+    }
+
+    async function createContact(contactInfo) {
+        let userKey = localStorage.getItem('APIkey');
+
+        let response = await $fetch('http://127.0.0.1:8000/api/contacts', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${userKey}`
+            },
+            credentials: 'omit',
+            body: contactInfo
+        });
+        console.log(response);
+    }
+
+    return {userContacts, searchContactsValue, filteredContacts, getUserContacts, getContactById, editContact, createContact};
 })
