@@ -17,10 +17,12 @@
                         <ErrorMessage name="password" as="div" class="bg-red-200 border-red-500 text-red-950 
                             p-1 m-1 rounded-md shadow-md text-center" />
                     </div>
-                    <div class="flex justify-center">
+                    <div class="flex flex-col items-center">
                         <button class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-20 active:bg-violet-700">
                             LOGIN
                         </button>
+                        <p id="errorText" hidden="true" class="bg-red-200 border-red-500 text-red-950 
+                            p-1 m-1 rounded-md shadow-md text-center"></p>
                     </div>
                 </div>
             </Form>
@@ -45,8 +47,18 @@ export default {
         ErrorMessage
     },
     methods: {
-        onSubmit(values) {
-            this.authStore.login(values.email, values.password).then(() => navigateTo('/contacts'));
+        async onSubmit(values) {
+            let errorText = document.getElementById('errorText');
+
+            try{
+                errorText.hidden = true;
+                await this.authStore.login(values.email, values.password);
+                navigateTo('/contacts');
+            }
+            catch(error) {
+                errorText.hidden = false;
+                errorText.innerText = error.message;
+            }
         }
     }
 }
