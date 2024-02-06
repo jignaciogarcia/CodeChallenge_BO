@@ -19,34 +19,30 @@
                     class="rounded-full w-20 h-20 md:h-40 md:w-40 md:border-2 md:border-black">
                 <p class="font-sans font-bold text-lg mt-3 md:mt-8">{{ contact.name }}</p>
                 <p class="text-slate-500">Title?</p>
-                <div class="hidden md:block mt-12">
-                    <div class="flex">
-                        <div>
-                            <p class="font-bold font-sans mb-2">Address</p>
-                            <p class="text-slate-500">{{ contact.address }}</p>
-                        </div>
-                        <div class="ml-10">
-                            <p class="font-bold font-sans mb-2">Email</p>
-                            <p class="text-slate-500">{{ contact.email }}</p>
-                        </div>
+            </div>
+            <div class="mt-5 ml-4 md:block md:relative md:bottom-24 md: md:mt-10">
+                <div class="grid grid-cols-1 gap-x-14 gap-y-5 md:grid-cols-2">
+                    <div>
+                        <p class="font-bold font-sans mb-2">Address</p>
+                        <p class="text-slate-500">{{ contact.address }}</p>
                     </div>
-                    <div class="mt-3">
+                    <div>
+                        <p class="font-bold font-sans mb-2">Email</p>
+                        <p class="text-slate-500">{{ contact.email }}</p>
+                    </div>
+                    <div>
                         <p class="font-bold font-sans mb-2">Phone</p>
                         <p class="text-slate-500">{{ contact.cellphoneNumber }}</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="py-5 px-4 md:hidden">
-            <p class="font-bold font-sans mb-2">Address</p>
-            <p class="text-slate-500">{{ contact.address }}</p>
-            <p class="font-bold font-sans mb-2 mt-5">Email</p>
-            <p class="text-slate-500">{{ contact.email }}</p>
-            <p class="font-bold font-sans mb-2 mt-5">Phone</p>
-            <p class="text-slate-500">{{ contact.cellphoneNumber }}</p>
-        </div>
-        <div class="flex justify-center items-end md:hidden">
-            <button class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-20 active:bg-violet-700">EDIT</button>
+        <div class="flex justify-center h-auto md:hidden">
+            <NuxtLink :to="`/contacts/create-update/${contact.id}`">
+                <button class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-20 active:bg-violet-700">
+                    EDIT
+                </button>
+            </NuxtLink>
         </div>
     </div>
 </template>
