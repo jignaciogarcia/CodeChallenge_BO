@@ -21,9 +21,15 @@ export const useContactsStore = defineStore('contactsStore', () => {
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${userKey}`
             },
-            credentials: 'omit'
+            credentials: 'omit',
+            onRequestError() {
+                throw new Error("An unexpected error has occurred while trying to retrieve user contacts");
+            },
+            onResponseError() {
+                throw new Error("An unexpected error has occurred while trying to retrieve user contacts");
+            }
         });
-        this.userContacts = response.contacts;
+        userContacts.value = response.contacts;
     }
 
     function getContactById(id) {
@@ -41,9 +47,18 @@ export const useContactsStore = defineStore('contactsStore', () => {
                 'Authorization': `Bearer ${userKey}`
             },
             credentials: 'omit',
-            body: contactInfo
+            body: contactInfo,
+            onRequestError() {
+                throw new Error("An unexpected error has occurred while trying to update contact");
+            },
+            onResponseError() {
+                throw new Error("An unexpected error has occurred while trying to update contact");
+            }
         });
-        console.log(response);
+
+        let updatedContact = response.contact;
+        userContacts.value = userContacts.value.filter(c => c.id != updatedContact.id);
+        userContacts.value.push(updatedContact);
     }
 
     async function createContact(contactInfo) {
@@ -56,9 +71,14 @@ export const useContactsStore = defineStore('contactsStore', () => {
                 'Authorization': `Bearer ${userKey}`
             },
             credentials: 'omit',
-            body: contactInfo
+            body: contactInfo,
+            onRequestError() {
+                throw new Error("An unexpected error has occurred while trying to add contact");
+            },
+            onResponseError() {
+                throw new Error("An unexpected error has occurred while trying to add contact");
+            }
         });
-        console.log(response);
     }
 
     return {userContacts, searchContactsValue, filteredContacts, getUserContacts, getContactById, editContact, createContact};

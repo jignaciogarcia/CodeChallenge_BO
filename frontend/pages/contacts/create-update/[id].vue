@@ -67,6 +67,8 @@
                         </div>
                     </div>
                     <div class="flex justify-center mt-7">
+                        <p id="infoText" hidden="true" class="bg-red-200 border-red-500 text-red-950 
+                            p-1 m-1 rounded-md shadow-md text-center"></p>
                         <div class="grid grid-cols-2 gap-x-2">
                             <button class="bg-violet-500 text-white rounded-3xl py-2.5 px-8 active:bg-violet-700 md:px-20"
                                 @click="goBack()" type="button">
@@ -111,12 +113,26 @@ export default {
             this.$router.go(-1);
         },
         onSubmit(values) {
-            console.log(values)
-            if(this.id != 'new'){
-                this.contactsStore.editContact(this.id, values);
+            let infoText = document.getElementById('infoText');
+            try {
+                infoText.hidden = true;
+                let successText;
+
+                if(this.id != 'new'){
+                    this.contactsStore.editContact(this.id, values);
+                    successText = "Contact updated successfully";
+                }
+                else {
+                    this.contactsStore.createContact(values);
+                    successText = "Contact added successfully";
+                }
+
+                infoText.hidden = false;
+                infoText.innerText = successText;
             }
-            else {
-                this.contactsStore.createContact(values);
+            catch(error) {
+                infoText.hidden = false;
+                infoText.innerText = error.message;
             }
         }
     }
