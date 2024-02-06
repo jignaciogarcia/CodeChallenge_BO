@@ -24,19 +24,8 @@ class ContactController extends Controller
 
     public function create(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'address' => 'string',
-            'email' => 'string|email',
-            'cellphoneNumber' => 'string',
-            'profilePictureUrl' => 'string'
-        ]);
-        $contact = new Contact();
-        $contact->name = $request->name;
-        $contact->address = $request->address;
-        $contact->email = $request->email;
-        $contact->cellphoneNumber = $request->cellphoneNumber;
-        $contact->profilePictureUrl = $request->profilePictureUrl;
+        $this->validateCreateUpdateRequest($request);
+        $contact = $this->parseRequestToContact($request);
 
         $user = auth()->user();
         $savedContact = $this->contactService->createContact($user, $contact);
@@ -46,24 +35,35 @@ class ContactController extends Controller
 
     public function update(Request $request, $id) 
     {
-        $request->validate([
-            'name' => 'string',
-            'address' => 'string',
-            'email' => 'string|email',
-            'cellphoneNumber' => 'string',
-            'profilePictureUrl' => 'string'
-        ]);
-        $newContact = new Contact();
-        $newContact->name = $request->name;
-        $newContact->address = $request->address;
-        $newContact->email = $request->email;
-        $newContact->cellphoneNumber = $request->cellphoneNumber;
-        $newContact->profilePictureUrl = $request->profilePictureUrl;
+        $this->validateCreateUpdateRequest($request);
+        $newContact = $this->parseRequestToContact($request);
 
         $user = auth()->user();
-
         $updatedContact = $this->contactService->updateContact($user->id, $newContact, $id);
 
         return response()->json(['contact'=> $updatedContact], 200);
+    }
+
+    private function validateCreateUpdateRequest(Request $request) 
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'address' => 'nullable|string',
+            'email' => 'nullable|string|email',
+            'cellphoneNumber' => 'nullable|string',
+            'profilePictureUrl' => 'nullable|string'
+        ]);
+    }
+
+    private function parseRequestToContact(Request $request) : Contact
+    {
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->address = $request->address;
+        $contact->email = $request->email;
+        $contact->cellphoneNumber = $request->cellphoneNumber;
+        $contact->profilePictureUrl = $request->profilePictureUrl;
+
+        return $contact;
     }
 }
