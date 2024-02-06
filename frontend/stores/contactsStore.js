@@ -1,6 +1,9 @@
 import { defineStore } from "pinia";
+import { API_KEY_STORAGE_NAME } from "~/constants";
 
 export const useContactsStore = defineStore('contactsStore', () => {
+    const config = useRuntimeConfig();
+    const apiRoute = config.public.apiUrl + 'contacts';
 
     const userContacts = ref([]);
     const searchContactsValue = ref('');
@@ -14,8 +17,8 @@ export const useContactsStore = defineStore('contactsStore', () => {
     });
         
     async function getUserContacts() {
-        let userKey = localStorage.getItem('APIkey');
-        let response = await $fetch('http://127.0.0.1:8000/api/contacts', {
+        let userKey = localStorage.getItem(API_KEY_STORAGE_NAME);
+        let response = await $fetch(apiRoute, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -37,8 +40,8 @@ export const useContactsStore = defineStore('contactsStore', () => {
     }
 
     async function editContact(contactId, contactInfo) {
-        let userKey = localStorage.getItem('APIkey');
-        let routeWithId = 'http://127.0.0.1:8000/api/contacts' + '/' + contactId;
+        let userKey = localStorage.getItem(API_KEY_STORAGE_NAME);
+        let routeWithId = apiRoute + '/' + contactId;
 
         let response = await $fetch(routeWithId, {
             method: 'PUT',
@@ -62,9 +65,9 @@ export const useContactsStore = defineStore('contactsStore', () => {
     }
 
     async function createContact(contactInfo) {
-        let userKey = localStorage.getItem('APIkey');
+        let userKey = localStorage.getItem(API_KEY_STORAGE_NAME);
 
-        let response = await $fetch('http://127.0.0.1:8000/api/contacts', {
+        let response = await $fetch(apiRoute, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

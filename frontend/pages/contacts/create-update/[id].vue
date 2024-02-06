@@ -89,6 +89,7 @@
 <script>
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { useContactsStore } from '#imports';
+import { ADD_CONTACT_ROUTE_PARAMETER } from '~/constants';
 
 export default {
     setup() {
@@ -99,7 +100,7 @@ export default {
         return {id, contactsStore, contact}
     },
     beforeMount() {
-        if(this.id != "new") {
+        if(this.id != ADD_CONTACT_ROUTE_PARAMETER) {
             this.contact = this.contactsStore.getContactById(this.id);
         }
     },
@@ -121,7 +122,7 @@ export default {
                 successText.hidden = true;
                 let successMessage;
 
-                if(this.id != 'new'){
+                if(this.id != ADD_CONTACT_ROUTE_PARAMETER){
                     await this.contactsStore.editContact(this.id, values);
                     successMessage = "Contact updated successfully";
                 }

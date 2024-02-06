@@ -1,9 +1,12 @@
 import { defineStore } from "pinia";
+import { API_KEY_STORAGE_NAME } from "~/constants";
 
 export const useAuthStore = defineStore('authStore', {
     actions: {
         async login(email, password) {
-            const key = await $fetch('http://127.0.0.1:8000/api/login', {
+            const config = useRuntimeConfig();
+
+            const key = await $fetch(config.public.apiUrl + 'login', {
                 method: 'POST',
                 body: {
                     "email": email,
@@ -28,7 +31,7 @@ export const useAuthStore = defineStore('authStore', {
                     throw new Error(errorText);
                 }
             });
-            localStorage.setItem('APIkey', key.token);
+            localStorage.setItem(API_KEY_STORAGE_NAME, key.token);
         }
     }
 })
