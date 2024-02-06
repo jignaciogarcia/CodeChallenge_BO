@@ -11,10 +11,10 @@
                 <div v-if="id != 'new'">
                     <img :src="`${contact.profilePictureUrl}`" class="rounded-full h-40 w-40 border-2 border-black">
                     <p class="font-sans font-bold text-lg mt-8 text-center">{{ contact.name }}</p>
-                    <p class="text-slate-500 text-center">Title</p>
+                    <p class="text-slate-500 text-center">{{ contact.title }}</p>
                 </div>
                 <div v-else>
-                    <img src="https://cdn2.iconfinder.com/data/icons/smiles-business/512/1041_boy_c-512.png"
+                    <img :src="DEFAULT_PROFILE_PICTURE"
                         class="rounded-full h-40 w-40 border-2 border-black">
                     <p class="font-sans font-bold text-lg mt-8 text-center"> Name</p>
                     <p class="text-slate-500 text-center">Title</p>
@@ -89,7 +89,7 @@
 <script>
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { useContactsStore } from '#imports';
-import { ADD_CONTACT_ROUTE_PARAMETER } from '~/constants';
+import { ADD_CONTACT_ROUTE_PARAMETER, DEFAULT_PROFILE_PICTURE } from '~/constants';
 
 export default {
     setup() {
@@ -108,6 +108,9 @@ export default {
         Form,
         Field,
         ErrorMessage
+    },
+    data() {
+        return {DEFAULT_PROFILE_PICTURE}
     },
     methods: {
         goBack() {
