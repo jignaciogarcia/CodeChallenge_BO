@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg-slate-100 w-screen h-screen">
         <header class="md:h-14 bg-fuchsia-100 block "></header>
         <div class="flex justify-center pt-28">
             <Form @submit="onSubmit">
