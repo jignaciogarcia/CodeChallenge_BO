@@ -51,7 +51,8 @@ class ContactController extends Controller
             'address' => 'nullable|string',
             'email' => 'nullable|string|email',
             'cellphoneNumber' => 'nullable|string',
-            'profilePictureUrl' => 'nullable|string'
+            'profilePictureUrl' => 'nullable|string',
+            'title' => 'nullable|string'
         ]);
     }
 
@@ -63,6 +64,7 @@ class ContactController extends Controller
         $contact->email = $request->email;
         $contact->cellphoneNumber = $request->cellphoneNumber;
         $contact->profilePictureUrl = $request->profilePictureUrl;
+        $contact->title = $request->title;
 
         return $contact;
     }

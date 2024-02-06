@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('cellphoneNumber')->nullable();
             $table->string('profilePictureUrl')->nullable();
+            $table->string('title')->nullable();
             $table->timestamps();
             $table->foreignUuid('user_id')
             ->references('id')

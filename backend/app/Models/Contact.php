@@ -15,7 +15,8 @@ class Contact extends Model
         'address',
         'email',
         'cellphoneNumber',
-        'profilePictureUrl'
+        'profilePictureUrl',
+        'title'
     ];
 
     protected $hidden = [

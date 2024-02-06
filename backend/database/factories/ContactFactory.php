@@ -13,7 +13,8 @@ class ContactFactory extends Factory
             'address' => fake()->address(),
             'email' => fake()->email(),
             'cellPhoneNumber' => fake()->phoneNumber(),
-            'profilePictureUrl' => fake()->url()
+            'profilePictureUrl' => fake()->url(),
+            'title' => 'UX Designer'
         ];
     }
 }
