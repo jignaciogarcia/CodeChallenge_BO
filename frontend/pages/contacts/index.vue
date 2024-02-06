@@ -21,7 +21,7 @@
         <div v-else class="flex justify-center mt-20">
             <p class="font-sans font-bold text-xl text-sky-900 w-52 text-center">Add contacts to your database</p>
         </div>
-        <div v-if="isSmallScreen" class="flex">
+        <div class="flex justify-end lg:hidden">
             <NuxtLink :to="`/contacts/create-update/new`">
                 <button
                     class="rounded-full bg-violet-500 ml-auto active:bg-violet-700 h-12 w-12 p-1 flex justify-center items-center">
@@ -32,7 +32,7 @@
                 </button>
             </NuxtLink>
         </div>
-        <div v-else class="flex justify-center">
+        <div class="hidden lg:flex lg:justify-center">
             <NuxtLink :to="`/contacts/create-update/new`">
                 <button class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-20 active:bg-violet-700">
                     Add new contacts
@@ -46,23 +46,8 @@
     import { useContactsStore } from '~/stores/contactsStore';
 
     const contactsStore = useContactsStore();
-    const isSmallScreen = ref(false);
-    var updateIsSmallScreen;
-
-    if(process.client) {
-        updateIsSmallScreen = () => {
-            isSmallScreen.value = window.innerWidth < 1024;
-        }
-        updateIsSmallScreen.call();
-    }
 
     onBeforeMount(async () => {
         await contactsStore.getUserContacts();
-
-        window.addEventListener('resize', updateIsSmallScreen);
-    })
-
-    onBeforeUnmount(() => {
-        window.removeEventListener('resize', updateIsSmallScreen);
     })
 </script>
