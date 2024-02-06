@@ -21,8 +21,7 @@
                         <button class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-20 active:bg-violet-700">
                             LOGIN
                         </button>
-                        <p id="errorText" hidden="true" class="bg-red-200 border-red-500 text-red-950 
-                            p-1 m-1 rounded-md shadow-md text-center"></p>
+                        <CustomErrorCard id="errorText" hidden="true" />
                     </div>
                 </div>
             </Form>
@@ -34,6 +33,7 @@
 <script>
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { useAuthStore } from '@/stores/authStore';
+import CustomErrorCard from '~/components/CustomErrorCard.vue';
 
 export default {
     setup() {
@@ -42,10 +42,11 @@ export default {
         return { authStore }
     },
     components: {
-        Form,
-        Field,
-        ErrorMessage
-    },
+    Form,
+    Field,
+    ErrorMessage,
+    CustomErrorCard
+},
     methods: {
         async onSubmit(values) {
             let errorText = document.getElementById('errorText');

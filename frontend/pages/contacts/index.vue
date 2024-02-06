@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-slate-100 h-screen w-screen">
+    <div class="bg-slate-100 h-full w-screen">
         <header class="md:h-14 bg-fuchsia-100 block"></header>
         <div class="pt-14 px-10 w-screen">
             <h1 class="font-sans font-bold text-3xl">Contacts</h1>
@@ -10,8 +10,7 @@
             </div>
         </div>
         <div class="mt-10 flex justify-center">
-            <p id="errorText" hidden="true" class="bg-red-200 border-red-500 text-red-950 
-                p-1 m-1 rounded-md shadow-md text-center"></p>
+            <CustomErrorCard id="errorText" hidden="true" />
         </div>
         <div v-if="contactsStore.userContacts.length > 0"
             class="mt-16 lg:mx-20 lg:grid lg:grid-cols-3 lg:gap-y-4 lg:gap-x-5 xl:gap-x-16 xl:mx-40">

@@ -66,9 +66,9 @@
                             p-1 m-1 rounded-md shadow-md text-center" />
                         </div>
                     </div>
-                    <div class="flex justify-center mt-7">
-                        <p id="infoText" hidden="true" class="bg-red-200 border-red-500 text-red-950 
-                            p-1 m-1 rounded-md shadow-md text-center"></p>
+                    <div class="flex flex-col justify-center mt-7">
+                        <CustomErrorCard id="errorText" hidden="true" />
+                        <CustomSuccessCard id="successText" hidden="true" />
                         <div class="grid grid-cols-2 gap-x-2">
                             <button class="bg-violet-500 text-white rounded-3xl py-2.5 px-8 active:bg-violet-700 md:px-20"
                                 @click="goBack()" type="button">
@@ -112,27 +112,30 @@ export default {
         goBack() {
             this.$router.go(-1);
         },
-        onSubmit(values) {
-            let infoText = document.getElementById('infoText');
+        async onSubmit(values) {
+            let errorText = document.getElementById('errorText');
+            let successText = document.getElementById('successText');
+
             try {
-                infoText.hidden = true;
-                let successText;
+                errorText.hidden = true;
+                successText.hidden = true;
+                let successMessage;
 
                 if(this.id != 'new'){
-                    this.contactsStore.editContact(this.id, values);
-                    successText = "Contact updated successfully";
+                    await this.contactsStore.editContact(this.id, values);
+                    successMessage = "Contact updated successfully";
                 }
                 else {
-                    this.contactsStore.createContact(values);
-                    successText = "Contact added successfully";
+                    await this.contactsStore.createContact(values);
+                    successMessage = "Contact added successfully";
                 }
 
-                infoText.hidden = false;
-                infoText.innerText = successText;
+                successText.hidden = false;
+                successText.innerText = successMessage;
             }
             catch(error) {
-                infoText.hidden = false;
-                infoText.innerText = error.message;
+                errorText.hidden = false;
+                errorText.innerText = error.message;
             }
         }
     }
