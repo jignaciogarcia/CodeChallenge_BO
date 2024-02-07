@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-slate-100 h-full w-screen">
+    <div class="bg-slate-100 h-screen w-screen">
         <header class="md:h-14 bg-fuchsia-100 block"></header>
         <div class="pt-14 px-10 w-screen">
             <h1 class="font-sans font-bold text-3xl">Contacts</h1>
@@ -24,7 +24,7 @@
         <div v-else class="flex justify-center mt-20">
             <p class="font-sans font-bold text-xl text-sky-900 w-52 text-center">Add contacts to your database</p>
         </div>
-        <div class="flex justify-end lg:hidden">
+        <div class="flex justify-end mt-3 lg:hidden">
             <NuxtLink :to="`/contacts/create-update/new`">
                 <button
                     class="rounded-full bg-violet-500 ml-auto active:bg-violet-700 h-12 w-12 p-1 flex justify-center items-center">

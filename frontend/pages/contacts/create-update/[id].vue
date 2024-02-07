@@ -9,7 +9,8 @@
         <div class="md:flex md:flex-col md:items-center">
             <div class="hidden md:flex flex-col items-center relative bottom-24 ">
                 <div v-if="id != 'new'">
-                    <img :src="`${contact.profilePictureUrl}`" class="rounded-full h-40 w-40 border-2 border-black">
+                    <img :src="`${contact.profilePictureUrl ? contact.profilePictureUrl : DEFAULT_PROFILE_PICTURE}`" 
+                    class="rounded-full h-40 w-40 border-2 border-black">
                     <p class="font-sans font-bold text-lg mt-8 text-center">{{ contact.name }}</p>
                     <p class="text-slate-500 text-center">{{ contact.title }}</p>
                 </div>
