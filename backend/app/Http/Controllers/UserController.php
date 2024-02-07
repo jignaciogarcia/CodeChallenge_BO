@@ -34,6 +34,8 @@ class UserController extends Controller
 
             $user = $this->userService->verifyUser($email, $password);
 
+            $user->tokens()->delete();
+
             $token = $user->createToken('personalToken')->plainTextToken;
             $message = 'Login Successful';
             $code = 200;
