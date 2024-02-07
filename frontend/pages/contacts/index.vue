@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-slate-100 h-screen w-screen">
+    <div class="bg-slate-50 h-screen w-screen">
         <header class="md:h-14 bg-fuchsia-100 block"></header>
         <div class="pt-14 px-10 w-screen">
             <h1 class="font-sans font-bold text-3xl">Contacts</h1>
@@ -21,21 +21,19 @@
                 <ContactCard :contact="contact" />
             </div>
         </div>
-        <div v-else class="flex justify-center mt-20">
+        <div v-else class="flex flex-col items-center justify-center mt-10">
+            <img src="../../assets/noContactsIcon.PNG" alt="No contacts icon" class="h-52 w-52 mb-5">
             <p class="font-sans font-bold text-xl text-sky-900 w-52 text-center">Add contacts to your database</p>
         </div>
-        <div class="flex justify-end mt-3 lg:hidden">
+        <div class="flex justify-end mt-3 md:hidden">
             <NuxtLink :to="`/contacts/create-update/new`">
-                <button
-                    class="rounded-full bg-violet-500 ml-auto active:bg-violet-700 h-12 w-12 p-1 flex justify-center items-center">
-                    <div>
-                        <div class="w-6 h-1 bg-white"></div>
-                        <div class="w-6 h-1 bg-white rotate-90"></div>
-                    </div>
+                <button class="rounded-full bg-violet-500 ml-auto active:bg-violet-700 h-12 w-12 p-1 flex 
+                    justify-center items-center text-white mr-5">
+                    Add
                 </button>
             </NuxtLink>
         </div>
-        <div class="hidden lg:flex lg:justify-center">
+        <div class="hidden md:flex md:justify-center">
             <NuxtLink :to="`/contacts/create-update/new`">
                 <button class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-20 active:bg-violet-700">
                     Add new contacts
