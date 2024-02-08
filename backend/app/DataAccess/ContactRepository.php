@@ -43,6 +43,10 @@ class ContactRepository implements IContactRepository
         {
             $oldContact->profilePictureUrl = $newContact->profilePictureUrl;
         }
+        if($newContact->title != null) 
+        {
+            $oldContact->title = $newContact->title;
+        }
 
         $oldContact->save();
         return $oldContact;
