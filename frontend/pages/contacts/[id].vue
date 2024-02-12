@@ -6,7 +6,7 @@
         <div class="hidden md:pt-10 md:px-14 md:block">
             <div class="bg-gray-300 h-48 w-full rounded-xl flex justify-end items-end">
                 <NuxtLink :to="`/contacts/create-update/${contact.id}`">
-                    <button class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-8 active:bg-violet-700 mr-5 mb-5">
+                    <button class="button px-8 mr-5 mb-5 mt-7">
                         EDIT
                     </button>
                 </NuxtLink>
@@ -39,7 +39,7 @@
         </div>
         <div class="flex justify-center h-auto md:hidden">
             <NuxtLink :to="`/contacts/create-update/${contact.id}`">
-                <button class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-20 active:bg-violet-700">
+                <button class="button px-20 mt-7">
                     EDIT
                 </button>
             </NuxtLink>

@@ -28,54 +28,54 @@
                             <p class="font-bold font-sans">Name</p>
                             <Field type="name" name="name" id="name" placeholder="Insert name..." 
                                 :value="`${contact.name ? contact.name : ''}`"
-                                class="w-full bg-fuchsia-100 h-10 px-4 rounded block md:w-72" rules="required" />
-                            <ErrorMessage name="name" as="div" class="bg-red-200 border-red-500 text-red-950 
-                            p-1 m-1 rounded-md shadow-md text-center" />
+                                class="createUpdateInput" rules="required" />
+                            <ErrorMessage name="name" as="div" class="errorMessage" />
                         </div>
                         <div>
                             <p class="font-bold font-sans">Address</p>
                             <Field type="address" name="address" id="address" placeholder="Insert address..."
                                 :value="`${contact.address ? contact.address : ''}`" 
-                                class="w-full bg-fuchsia-100 h-10 px-4 rounded block md:w-72" />
+                                class="createUpdateInput" />
                         </div>
                         <div>
                             <p class="font-bold font-sans">Title</p>
                             <Field type="title" name="title" id="title" placeholder="Insert title..."
                                 :value="`${contact.title ? contact.title : ''}`" 
-                                class="w-full bg-fuchsia-100 h-10 px-4 rounded block md:w-72" />
+                                class="createUpdateInput" />
                         </div>
                         <div>
                             <p class="font-bold font-sans">Phone</p>
                             <Field type="cellphoneNumber" name="cellphoneNumber" id="cellphoneNumber" 
                                 placeholder="Insert phone..."
                                 :value="`${contact.cellphoneNumber ? contact.cellphoneNumber : ''}`"
-                                class="w-full bg-fuchsia-100 h-10 px-4 rounded block md:w-72" />
+                                class="createUpdateInput" />
                         </div>
                         <div>
                             <p class="font-bold font-sans">Profile Picture</p>
                             <Field type="profilePictureUrl" name="profilePictureUrl" id="profilePictureUrl" 
                                 placeholder="Insert picture URL..."
                                 :value="`${contact.profilePictureUrl ? contact.profilePictureUrl : ''}`"
-                                class="w-full bg-fuchsia-100 h-10 px-4 rounded block md:w-72" />
+                                class="createUpdateInput" />
                         </div>
                         <div>
                             <p class="font-bold font-sans">Email</p>
                             <Field type="email" name="email" id="email" placeholder="Insert email..."
                                 :value="`${contact.email ? contact.email : ''}`" rules="email"
-                                class="w-full bg-fuchsia-100 h-10 px-4 rounded block md:w-72" />
-                            <ErrorMessage name="email" as="div" class="bg-red-200 border-red-500 text-red-950 
-                            p-1 m-1 rounded-md shadow-md text-center" />
+                                class="createUpdateInput" />
+                            <ErrorMessage name="email" as="div" class="errorMessage" />
                         </div>
                     </div>
                     <div class="flex flex-col justify-center mt-7">
-                        <CustomErrorCard id="errorText" hidden="true" />
-                        <CustomSuccessCard id="successText" hidden="true" />
+                        <p id="infoText" hidden="true" :class="{
+                            'successMessage': !infoTextIsError,
+                            'errorMessage': infoTextIsError 
+                        }"></p>
                         <div class="grid grid-cols-2 gap-x-2">
-                            <button class="bg-violet-500 text-white rounded-3xl py-2.5 px-8 active:bg-violet-700 md:px-20"
+                            <button class="button px-8 md:px-20"
                                 @click="goBack()" type="button">
                                 CANCEL
                             </button>
-                            <button class="bg-violet-500 text-white rounded-3xl py-2.5 px-8 active:bg-violet-700 md:px-20">
+                            <button class="button px-8 md:px-20">
                                 SAVE
                             </button>
                         </div>
@@ -96,9 +96,10 @@ export default {
     setup() {
         const { id } = useRoute().params;
         const contactsStore = useContactsStore();
-        var contact = {};
+        let contact = {};
+        const infoTextIsError = ref(false)
 
-        return {id, contactsStore, contact}
+        return {id, contactsStore, contact, infoTextIsError}
     },
     beforeMount() {
         if(this.id != ADD_CONTACT_ROUTE_PARAMETER) {
@@ -118,29 +119,29 @@ export default {
             this.$router.go(-1);
         },
         async onSubmit(values) {
-            let errorText = document.getElementById('errorText');
-            let successText = document.getElementById('successText');
+            let infoText = document.getElementById('infoText');
 
             try {
-                errorText.hidden = true;
-                successText.hidden = true;
-                let successMessage;
+                this.infoTextIsError = false;
+                infoText.hidden = true;
+                let infoTextMessage;
 
                 if(this.id != ADD_CONTACT_ROUTE_PARAMETER){
                     await this.contactsStore.editContact(this.id, values);
-                    successMessage = "Contact updated successfully";
+                    infoTextMessage = "Contact updated successfully";
                 }
                 else {
                     await this.contactsStore.createContact(values);
-                    successMessage = "Contact added successfully";
+                    infoTextMessage = "Contact added successfully";
                 }
 
-                successText.hidden = false;
-                successText.innerText = successMessage;
+                infoText.hidden = false;
+                infoText.innerText = infoTextMessage;
             }
             catch(error) {
-                errorText.hidden = false;
-                errorText.innerText = error.message;
+                this.infoTextIsError = true;
+                infoText.hidden = false;
+                infoText.innerText = error.message;
             }
         }
     }

@@ -1,0 +1,16 @@
+
+.errorMessage {
+    @apply bg-red-200 border-red-500 text-red-950 p-1 m-1 rounded-md shadow-md text-center;
+}
+
+.successMessage {
+    @apply bg-green-200 border-green-500 text-green-950 p-1 m-1 rounded-md shadow-md text-center;
+}
+
+.createUpdateInput {
+    @apply w-full bg-fuchsia-100 h-10 px-4 rounded block md:w-72;
+}
+
+.button {
+    @apply bg-violet-500 text-white rounded-3xl py-2.5 active:bg-violet-700;
+}

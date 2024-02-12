@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="mt-10 flex justify-center">
-            <CustomErrorCard id="errorText" hidden="true" />
+            <p id="errorText" hidden="true" class="errorMessage"></p>
         </div>
         <div v-if="contactsStore.userContacts.length > 0"
             class="mt-16 lg:mx-20 lg:grid lg:grid-cols-3 lg:gap-y-4 lg:gap-x-5 xl:gap-x-16 xl:mx-40">
@@ -35,7 +35,7 @@
         </div>
         <div class="hidden md:flex md:justify-center">
             <NuxtLink :to="`/contacts/create-update/new`">
-                <button class="bg-violet-500 text-white rounded-3xl mt-7 py-2.5 px-20 active:bg-violet-700">
+                <button class="button px-20 mt-7">
                     Add new contacts
                 </button>
             </NuxtLink>
