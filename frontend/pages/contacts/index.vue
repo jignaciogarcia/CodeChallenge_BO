@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-slate-50 h-screen w-screen">
+    <div class="bg-slate-50 min-h-screen h-full w-full">
         <header class="md:h-14 bg-fuchsia-100 block"></header>
-        <div class="pt-14 px-10 w-screen">
+        <div class="pt-14 px-10 w-full">
             <h1 class="font-sans font-bold text-3xl">Contacts</h1>
             <div class="mt-5 rounded p-1 shadow-x1 w-full flex bg-white">
                 <img src="../../assets/searchIcon.png" alt="Search icon" class="h-5 w-5">
@@ -9,7 +9,7 @@
                     v-model="contactsStore.searchContactsValue">
             </div>
         </div>
-        <div class="mt-10 flex justify-center">
+        <div class="flex justify-center">
             <p id="errorText" hidden="true" class="errorMessage"></p>
         </div>
         <div v-if="contactsStore.userContacts.length > 0"

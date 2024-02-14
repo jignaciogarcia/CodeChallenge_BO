@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-slate-50 md:bg-slate-100 h-screen md:h-full w-screen">
+    <div class="bg-slate-50 md:bg-slate-100 h-full min-h-screen w-screen">
         <header class="h-14 md:bg-fuchsia-100 flex items-center">
             <button class="text-slate-500 ml-2 md:ml-5" @click="goBack()">&lt Back</button>
         </header>
