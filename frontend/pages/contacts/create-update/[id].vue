@@ -1,7 +1,7 @@
 <template>
     <div class="bg-slate-50 md:bg-slate-100 h-full min-h-screen w-screen">
         <header class="h-14 md:bg-fuchsia-100 flex items-center">
-            <button class="text-slate-500 ml-2 md:ml-5" @click="goBack()">&lt Back</button>
+            <button id="backButton" class="text-slate-500 ml-2 md:ml-5" @click="goBack()">&lt Back</button>
         </header>
         <div class="hidden md:pt-10 md:px-14 md:block">
             <div class="bg-gray-300 h-48 w-full rounded-xl"></div>
@@ -72,11 +72,11 @@
                             'errorMessage': infoTextIsError 
                         }"></p>
                         <div class="grid grid-cols-2 gap-x-2">
-                            <button class="button px-8 md:px-20"
+                            <button id="cancelButton" class="button px-8 md:px-20"
                                 @click="goBack()" type="button">
                                 CANCEL
                             </button>
-                            <button class="button px-8 md:px-20">
+                            <button id="saveButton" class="button px-8 md:px-20">
                                 SAVE
                             </button>
                         </div>
@@ -147,6 +147,13 @@ export default {
         async onSubmit(values) {
             let infoText = document.getElementById('infoText');
 
+            let saveButton = document.getElementById('saveButton');
+            saveButton.disabled = true;
+            let cancelButton = document.getElementById('cancelButton');
+            cancelButton.disabled = true;
+            let backButton = document.getElementById('backButton');
+            backButton.disabled = true;
+
             if(this.id == ADD_CONTACT_ROUTE_PARAMETER) {
                 let address = this.addressRef.value;
                 values.address = address;
@@ -173,6 +180,11 @@ export default {
                 this.infoTextIsError = true;
                 infoText.hidden = false;
                 infoText.innerText = error.message;
+            }
+            finally {
+                saveButton.disabled = false;
+                cancelButton.disabled = false;
+                backButton.disabled = false;
             }
         }
     }

@@ -16,7 +16,7 @@
                         <ErrorMessage name="password" as="div" class="errorMessage" />
                     </div>
                     <div class="flex flex-col items-center">
-                        <button class="button px-20 mt-7">
+                        <button id="loginButton" class="button px-20 mt-7">
                             LOGIN
                         </button>
                         <p id="errorText" hidden="true" class="errorMessage"></p>
@@ -46,6 +46,9 @@ export default {
     methods: {
         async onSubmit(values) {
             let errorText = document.getElementById('errorText');
+            
+            let loginButton = document.getElementById('loginButton');
+            loginButton.disabled = true;
 
             try{
                 errorText.hidden = true;
@@ -55,6 +58,9 @@ export default {
             catch(error) {
                 errorText.hidden = false;
                 errorText.innerText = error.message;
+            }
+            finally {
+                loginButton.disabled = false;
             }
         }
     }
