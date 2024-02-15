@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     "@pinia/nuxt"],
   runtimeConfig: {
     public: {
-      apiUrl: process.env.API_URL
+      apiUrl: process.env.API_URL,
+      googleApiKey: process.env.GOOGLE_API_KEY
     }
   }
 })

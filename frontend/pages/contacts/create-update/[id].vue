@@ -33,9 +33,10 @@
                         </div>
                         <div>
                             <p class="font-bold font-sans">Address</p>
-                            <Field type="address" name="address" id="address" placeholder="Insert address..."
-                                :value="`${contact.address ? contact.address : ''}`" 
-                                class="createUpdateInput" />
+                            <input v-if="id == ADD_CONTACT_ROUTE_PARAMETER" type="text" name="address" id="address" 
+                                ref="addressRef" class="createUpdateInput" placeholder="Insert address..." />
+                            <Field v-else type="address" name="address" id="address" placeholder="Insert address..."
+                                :value="contact.address" class="createUpdateInput" />
                         </div>
                         <div>
                             <p class="font-bold font-sans">Title</p>
@@ -96,15 +97,40 @@ export default {
     setup() {
         const { id } = useRoute().params;
         const contactsStore = useContactsStore();
-        let contact = {};
-        const infoTextIsError = ref(false)
+        const contact = ref({});
+        const infoTextIsError = ref(false);
+        const addressRef = ref(null);
 
-        return {id, contactsStore, contact, infoTextIsError}
-    },
-    beforeMount() {
-        if(this.id != ADD_CONTACT_ROUTE_PARAMETER) {
-            this.contact = this.contactsStore.getContactById(this.id);
-        }
+        const config = useRuntimeConfig();
+        let googleApiKey = config.public.googleApiKey;
+        const src = "https://maps.googleapis.com/maps/api/js?key=" + googleApiKey +"&libraries=places";
+
+        onBeforeMount(() => {
+            if(id != ADD_CONTACT_ROUTE_PARAMETER) {
+                contact.value = contactsStore.getContactById(id);
+            };
+        });
+
+        onMounted(() => {
+            if(id == ADD_CONTACT_ROUTE_PARAMETER) {
+                let script = document.querySelector(`script[src="${src}"]`);
+
+                if(!script) {
+                    script = document.createElement('script');
+                    script.src = src;
+                    document.head.append(script);
+
+                    script.addEventListener('load', () => {
+                        new google.maps.places.Autocomplete(addressRef.value);
+                    });
+                }
+                else {
+                    new google.maps.places.Autocomplete(addressRef.value);
+                }
+            }
+        });
+
+        return {id, contactsStore, contact, infoTextIsError, addressRef, ADD_CONTACT_ROUTE_PARAMETER}
     },
     components: {
         Form,
@@ -120,6 +146,11 @@ export default {
         },
         async onSubmit(values) {
             let infoText = document.getElementById('infoText');
+
+            if(this.id == ADD_CONTACT_ROUTE_PARAMETER) {
+                let address = this.addressRef.value;
+                values.address = address;
+            }
 
             try {
                 this.infoTextIsError = false;

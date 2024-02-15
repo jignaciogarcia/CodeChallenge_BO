@@ -24,7 +24,7 @@
                 <div class="grid grid-cols-1 gap-x-14 gap-y-5 md:grid-cols-2">
                     <div>
                         <p class="font-bold font-sans mb-2">Address</p>
-                        <p class="text-slate-500">{{ contact.address }}</p>
+                        <p class="text-slate-500 max-w-56">{{ contact.address }}</p>
                     </div>
                     <div>
                         <p class="font-bold font-sans mb-2">Email</p>
