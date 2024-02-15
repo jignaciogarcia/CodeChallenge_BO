@@ -28,14 +28,14 @@
         <div class="flex justify-end mt-3 md:hidden">
             <NuxtLink :to="`/contacts/create-update/new`">
                 <button class="rounded-full bg-violet-500 ml-auto active:bg-violet-700 h-12 w-12 p-1 flex 
-                    justify-center items-center text-white mr-5">
+                    justify-center items-center text-white mr-5 mb-3">
                     Add
                 </button>
             </NuxtLink>
         </div>
         <div class="hidden md:flex md:justify-center">
             <NuxtLink :to="`/contacts/create-update/new`">
-                <button class="button px-20 mt-7">
+                <button class="button px-20 mt-7 mb-3">
                     Add new contacts
                 </button>
             </NuxtLink>

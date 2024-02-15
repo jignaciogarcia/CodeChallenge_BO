@@ -25,41 +25,41 @@
                 <Form @submit="onSubmit">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-2">
                         <div>
-                            <p class="font-bold font-sans">Name</p>
+                            <label for="name" class="font-bold font-sans">Name</label>
                             <Field type="name" name="name" id="name" placeholder="Insert name..." 
                                 :value="`${contact.name ? contact.name : ''}`"
                                 class="createUpdateInput" rules="required" />
                             <ErrorMessage name="name" as="div" class="errorMessage" />
                         </div>
                         <div>
-                            <p class="font-bold font-sans">Address</p>
+                            <label for="address" class="font-bold font-sans">Address</label>
                             <input v-if="id == ADD_CONTACT_ROUTE_PARAMETER" type="text" name="address" id="address" 
                                 ref="addressRef" class="createUpdateInput" placeholder="Insert address..." />
                             <Field v-else type="address" name="address" id="address" placeholder="Insert address..."
                                 :value="contact.address" class="createUpdateInput" />
                         </div>
                         <div>
-                            <p class="font-bold font-sans">Title</p>
+                            <label for="title" class="font-bold font-sans">Title</label>
                             <Field type="title" name="title" id="title" placeholder="Insert title..."
                                 :value="`${contact.title ? contact.title : ''}`" 
                                 class="createUpdateInput" />
                         </div>
                         <div>
-                            <p class="font-bold font-sans">Phone</p>
+                            <label for="cellphoneNumber" class="font-bold font-sans">Phone</label>
                             <Field type="cellphoneNumber" name="cellphoneNumber" id="cellphoneNumber" 
                                 placeholder="Insert phone..."
                                 :value="`${contact.cellphoneNumber ? contact.cellphoneNumber : ''}`"
                                 class="createUpdateInput" />
                         </div>
                         <div>
-                            <p class="font-bold font-sans">Profile Picture</p>
+                            <label for="profilePictureUrl" class="font-bold font-sans">Profile Picture</label>
                             <Field type="profilePictureUrl" name="profilePictureUrl" id="profilePictureUrl" 
                                 placeholder="Insert picture URL..."
                                 :value="`${contact.profilePictureUrl ? contact.profilePictureUrl : ''}`"
                                 class="createUpdateInput" />
                         </div>
                         <div>
-                            <p class="font-bold font-sans">Email</p>
+                            <label for="email" class="font-bold font-sans">Email</label>
                             <Field type="email" name="email" id="email" placeholder="Insert email..."
                                 :value="`${contact.email ? contact.email : ''}`" rules="email"
                                 class="createUpdateInput" />
